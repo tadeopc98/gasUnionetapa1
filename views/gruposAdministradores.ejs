@@ -4,18 +4,19 @@
   <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nuevo Usuario</title>
+    <title>Control de Usuarios</title>
     <!-- ======= Styles ====== -->
     <link rel="stylesheet"  href="/style3.css">
-    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10.15.5/dist/sweetalert2.min.css">
+
 </head>
 <body>
-    <!-- =============== Navigation ================ -->
-  <div class="container">
+   <!-- =============== Navigation ================ -->
+   <div class="container">
     <div class="navigation">
         <ul>
             <li>
-                <a  href="/administracion">
+                <a href="#">
                     <span class="icon">
                         <ion-icon name="business-outline"></ion-icon>
                     </span>
@@ -33,7 +34,7 @@
             </li>
 
             <li>
-                <a href="./dashboard/UsersControlAdmin">
+                <a href="#">
                     <span class="icon">
                         <ion-icon name="person-outline"></ion-icon>
                     </span>
@@ -60,7 +61,7 @@
             </li>
 
             <li>
-                <a href="#">
+                <a href="/bloques">
                     <span class="icon">
                         <ion-icon name="file-tray-stacked-outline"></ion-icon>
                     </span>
@@ -109,60 +110,79 @@
                 <span class="title"><%= datos.rol %></span>
             </div>
         </div>
-        <div class="custom-form">
-          <div class="custom-card">
-              <h2 class="custom-form-header">Nuevo Registro de Usuario</h2>
-              <div class="custom-form-content">
-                  <form action="/saveUser" method="POST">
-                      <div class="input-group">
-                          <label for="nombre">Nombre Completo</label>
-                          <input type="text" id="nombre" name="nombre" tabindex="1">
-                      </div>
-                      <div class="input-group">
-                          <label for="num">No. Empleado</label>
-                          <input type="text" id="num" name="num" tabindex="2">
-                      </div>
-                      <div class="input-group">
-                        <label for="username">Nombre de Usuario</label>
-                        <input type="text" id="username" name="username" tabindex="2">
-                      </div>
-                      <div class="input-group">
-                        <label for="pass">Contraseña</label>
-                        <input type="text" id="pass" name="pass" tabindex="2">
-                      </div>
-                      <div class="custom-select">
-                        <label for="rol" class="custom-select-label">Nivel de usuario</label>
-                        <select id="rol" name="rol" class="custom-select-input" tabindex="6">
-                            <option>ADMINISTRADOR</option>
-                            <option>SUPERVISOR</option>
-                            <option>COORDINADOR</option>
-                            <option>OPERADOR</option>
-                        </select>
-                    </div>
-                    <div class="custom-select">
-                        <label for="st" class="custom-select-label">Estatus</label>
-                        <select id="st" name="st" class="custom-select-input" tabindex="6">
-                            <option>ACTIVO</option>
-                            <option>DESACTIVADO</option>
-                        </select>
-                    </div>
-                    
-                      <div class="button-group">
-                          <button type="submit" class="custom-primary-button" tabindex="5">Guardar</button>
-                          <a href="./dashboardUsersControlAdmin.ejs" class="custom-secondary-button">Cancelar</a>
-                      </div>
-                  </form>
+
+        <!-- ================ Order Details List ================= -->
+        <div class="details">
+          <div class="recentOrders">
+              <div class="cardHeader">
+                  <h2>Usuarios en sistema</h2>
+                  <a href="/createAdmin"><ion-icon name="add-circle-outline" style="font-size: 35px;" title="Nuevo Usuario"></ion-icon></a>
               </div>
+
+              <table id="tblUsuarios">
+                  <thead>
+                      <tr>
+                          <td>ID</td>
+                          <td>NOMBRE</td>
+                          <td>RESIDENTE</td>
+                          <td>TELEFONO </td>
+                          <td>TELEFONO 2</td>
+                          <td>CORREO </td>
+                          <td>CORREO 2</td>
+                          <td>ACCIONES</td>
+                      </tr>
+                  </thead>
+
+                  <tbody>
+                      <% results.forEach((admin)=>{ %>
+                      <tr>
+                          <td><%= admin.idAdmin %></td>
+                          <td><%= admin.nombre %></td>
+                          <td><%= admin.residente %></td>
+                          <td><%= admin.telefono1 %></td>
+                          <td><%= admin.telefono2 %></td>
+                          <td><%= admin.correo1 %></td>
+                          <td><%= admin.correo2 %></td>
+                          <td>
+                              <a  onclick="confirmar(<%= admin.idAdmin %>)" class="btn btn-outline-danger"><ion-icon name="trash-outline" style="font-size: 25px;"></ion-icon></a>
+                            </td>
+                      </tr>
+                      <% }) %>
+                  </tbody>
+              </table>
           </div>
+
+          
       </div>
-      
-      
-      <!-- =========== Scripts =========  -->
+  </div>
+</div>
+
+<!-- =========== Scripts =========  -->
 <script src="/main.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.15.5/dist/sweetalert2.min.js"></script>
+<script>
+    function confirmar(id){
+        Swal.fire({
+          title: 'Confirma eliminar el registro: '+id+' ?',
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Confirmar',
+        }).then((result) => {
+          
+          if (result.isConfirmed) {
+            window.location = '/deleteAdmin/'+id;
+          } 
+        })
+      }
+</script>
 
 <!-- ====== ionicons ======= -->
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+
 
 </body>
 </html>

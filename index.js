@@ -208,6 +208,13 @@ app.get('/createUsers', (req,res)=>{
 });
 
 
+app.get('/createAdmin', (req,res)=>{
+  
+  const datos = req.session.datos;
+  res.render('createAdmin',{datos});
+          
+});
+
 
 app.get('/dashboard/UsersControlAdmin',verificarSesion, (req, res)=>{     
   connection.query('SELECT * FROM usuarios',(error, results)=>{
@@ -216,6 +223,18 @@ app.get('/dashboard/UsersControlAdmin',verificarSesion, (req, res)=>{
       } else {
           const datos = req.session.datos;                     
           res.render('dashboardUsersControlAdmin', {results:results,datos});  
+                    
+      }   
+  })
+});
+
+app.get('/gruposAdministradores',verificarSesion, (req, res)=>{     
+  connection.query('SELECT * FROM administradores',(error, results)=>{
+      if(error){
+          throw error;
+      } else {
+          const datos = req.session.datos;                     
+          res.render('gruposAdministradores', {results:results,datos});  
                     
       }   
   })
@@ -268,10 +287,17 @@ app.get('/createClientAdministration', (req,res)=>{
           if(error){
               throw error;
           } else {
-            const opcionesBloque = results.map(row => row.nombreBloque ); 
-            const datos = req.session.datos;
-          res.render('createClientAdministration',{opcionesBloque,client:results2[0],datos});
-          console.log(opcionesBloque);
+            connection.query('SELECT nombre FROM administradores ',(error,results3)=>{
+              if(error){
+                  throw error;
+              } else {
+                const opcionesAdmin = results3.map(row => row.nombre ); 
+                const opcionesBloque = results.map(row => row.nombreBloque ); 
+                const datos = req.session.datos;
+              res.render('createClientAdministration',{opcionesBloque,client:results2[0],datos,opcionesAdmin});
+              console.log(opcionesBloque);
+              }
+            })
           }
         })
           

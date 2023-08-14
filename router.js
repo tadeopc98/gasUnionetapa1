@@ -32,6 +32,17 @@ router.get('/deleteUser/:id', (req, res) => {
   });
 });
 
+router.get('/deleteAdmin/:id', (req, res) => {
+  const id = req.params.id;
+  connection.query('DELETE FROM administradores WHERE idAdmin = ?', [id], (error, results) => {
+    if (error) {
+      console.log(error);
+    } else {
+      res.redirect('/gruposAdministradores');
+    }
+  });
+});
+
 router.get('/editClient/:id', (req, res) => {
   const id = req.params.id;
   connection.query('SELECT * FROM clientes WHERE noCliente= ?', [id], (error, results) => {
@@ -66,11 +77,13 @@ router.get('/deleteClient/:id', (req, res) => {
 
 
 
+
 router.post('/saveUser', crud.saveUser);
 router.post('/updateUser', crud.updateUser);
 router.post('/saveClientSuministro', crud.saveClientSuministro);
 router.post('/saveClientAdministration',crud.saveClientAdministration)
 router.post('/updateClient',crud.updateClient);
+router.post('/saveAdmin',crud.saveAdmin)
 
 
 module.exports = router;

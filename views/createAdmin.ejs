@@ -111,45 +111,38 @@
         </div>
         <div class="custom-form">
           <div class="custom-card">
-              <h2 class="custom-form-header">Nuevo Registro de Usuario</h2>
+              <h2 class="custom-form-header">Nuevo Registro de Administradores</h2>
               <div class="custom-form-content">
-                  <form action="/saveUser" method="POST">
+                  <form action="/saveAdmin" method="POST">
                       <div class="input-group">
-                          <label for="nombre">Nombre Completo</label>
+                          <label for="nombre">Nombre de Administracion</label>
                           <input type="text" id="nombre" name="nombre" tabindex="1">
                       </div>
                       <div class="input-group">
-                          <label for="num">No. Empleado</label>
-                          <input type="text" id="num" name="num" tabindex="2">
+                          <label for="res">Residente</label>
+                          <input type="text" id="res" name="res" tabindex="2">
                       </div>
                       <div class="input-group">
-                        <label for="username">Nombre de Usuario</label>
-                        <input type="text" id="username" name="username" tabindex="2">
+                        <label for="tel1">Telefono</label>
+                        <input type="text" id="tel1" name="tel1" tabindex="3">
                       </div>
                       <div class="input-group">
-                        <label for="pass">Contraseña</label>
-                        <input type="text" id="pass" name="pass" tabindex="2">
+                        <label for="tel2">Telefono alternativo</label>
+                        <input type="text" id="tel2" name="tel2" tabindex="4">
                       </div>
-                      <div class="custom-select">
-                        <label for="rol" class="custom-select-label">Nivel de usuario</label>
-                        <select id="rol" name="rol" class="custom-select-input" tabindex="6">
-                            <option>ADMINISTRADOR</option>
-                            <option>SUPERVISOR</option>
-                            <option>COORDINADOR</option>
-                            <option>OPERADOR</option>
-                        </select>
-                    </div>
-                    <div class="custom-select">
-                        <label for="st" class="custom-select-label">Estatus</label>
-                        <select id="st" name="st" class="custom-select-input" tabindex="6">
-                            <option>ACTIVO</option>
-                            <option>DESACTIVADO</option>
-                        </select>
-                    </div>
+                      <div class="input-group">
+                        <label for="mail1">Correo</label>
+                        <input type="text" id="mail1" name="mail1" tabindex="5">
+                      </div>
+                      <div class="input-group">
+                        <label for="mail2">Correo alternativo</label>
+                        <input type="text" id="mail2" name="mail2" tabindex="6">
+                      </div>
+                      
                     
                       <div class="button-group">
                           <button type="submit" class="custom-primary-button" tabindex="5">Guardar</button>
-                          <a href="./dashboardUsersControlAdmin.ejs" class="custom-secondary-button">Cancelar</a>
+                          <a href="./gruposAdministradores" class="custom-secondary-button">Cancelar</a>
                       </div>
                   </form>
               </div>

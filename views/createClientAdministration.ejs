@@ -77,6 +77,14 @@
                     <span class="title">Precio gas</span>
                 </a>
             </li>
+            <li>
+                <a href="/gruposAdministradores">
+                    <span class="icon">
+                        <ion-icon name="lock-closed-outline"></ion-icon>
+                    </span>
+                    <span class="title">Administradores</span>
+                </a>
+            </li>
 
             <li>
                 <a href="/logout">
@@ -188,7 +196,17 @@
                                   <% }); %>              
                                   <option>NINGUNO</option>    
                                 </select>
-                            </div>     
+                            </div>  
+                            
+                            <div class="custom-select">
+                                <label for="admin" class="custom-select-label">Administrador</label>
+                                <select id="admin" name="admin" class="custom-select-input" aria-label="Default select example" tabindex="14">
+                                  <% opcionesAdmin.forEach((nombre) => { %>
+                                    <option><%=  nombre %></option>
+                                  <% }); %>              
+                                  <option>NINGUNO</option>    
+                                </select>
+                            </div>  
                         <div class="input-group">
                           <label for="obser" class="form-label">Observaciones</label>
                           <input type="text" class="form-control" id="obser" name="obser" tabindex="15">

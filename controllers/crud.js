@@ -25,9 +25,6 @@ exports.saveUser = (req, res)=>{
     const rol = req.body.rol.toUpperCase();
     const st = req.body.st.toUpperCase();
     
-    
-
-    
     connection.query('SELECT COUNT(*) AS count FROM usuarios WHERE noEmpleado = ?',[num], (error, countResult)=>{
         if(error){
             console.log(error);
@@ -123,8 +120,9 @@ exports.saveClientAdministration = (req, res)=>{
     const fechaRegistro = fechaCompleta;
     const usuarioRegistra = req.body.userRe;
     const tipCliente = req.body.tipCliente;
+    const admin = req.body.admin;
 
-    connection.query('INSERT INTO clientes SET ?',{noCliente:noCliente,nombreCliente:nombre,razonSocial:razonSocial,calle:calle,noExterior:noExt,noInterior:noInt,cp:cp,colonia:colonia,municipio:municipio,estado:estado,direccion:direccion,frecuenciaCarga:frecCarga,diaCarga:diaCarga,pagoPreferente:pagoPref,bloqueSeccion:bloque,observaciones:obser,statusCliente:status,telefonoCliente:telefono,telefonoCasa:telefonoCasa,telefonoOf:telefonoOficina,correoCliente:correo,correo2:correo2,fechaRegistro:fechaRegistro,usuarioRegistro:usuarioRegistra,tipoCliente:tipCliente}, (error, results)=>{
+    connection.query('INSERT INTO clientes SET ?',{noCliente:noCliente,nombreCliente:nombre,razonSocial:razonSocial,calle:calle,noExterior:noExt,noInterior:noInt,cp:cp,colonia:colonia,municipio:municipio,estado:estado,direccion:direccion,frecuenciaCarga:frecCarga,diaCarga:diaCarga,pagoPreferente:pagoPref,bloqueSeccion:bloque,observaciones:obser,statusCliente:status,telefonoCliente:telefono,telefonoCasa:telefonoCasa,telefonoOf:telefonoOficina,correoCliente:correo,correo2:correo2,fechaRegistro:fechaRegistro,usuarioRegistro:usuarioRegistra,tipoCliente:tipCliente,admin:admin}, (error, results)=>{
         if(error){
             console.log(error);
         }else{
@@ -190,6 +188,26 @@ exports.updateClient = (req, res)=>{
                     //console.log(results);   
                     res.redirect('/carteraClientes');                
         }
+});
+};
+
+exports.saveAdmin = (req, res)=>{
+    const nombre = req.body.nombre.toUpperCase();
+    const residente = req.body.res.toUpperCase();
+    const telefono1 = req.body.tel1;
+    const telefono2 = req.body.tel2;
+    const correo1 = req.body.mail1.toUpperCase();
+    const correo2 = req.body.mail2.toUpperCase();
+
+
+    connection.query('INSERT INTO administradores SET ?',{nombre:nombre,residente:residente,telefono1:telefono1,telefono2:telefono2,correo1:correo1,correo2:correo2}, (error, results)=>{
+        if(error){
+            console.log(error);
+            res.redirect('/gruposAdministradores');
+            }else{
+                res.redirect('/gruposAdministradores');
+                }
+           
 });
 };
 
